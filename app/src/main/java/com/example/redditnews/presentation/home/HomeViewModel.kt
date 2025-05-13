@@ -55,4 +55,8 @@ class HomeViewModel @Inject constructor(private val getNewsUseCase: GetNewsUseCa
         }
     }
 
+    fun hideErrorDialog() {
+        _uiState.update { it.copy(error = null) }
+    }
+
 }

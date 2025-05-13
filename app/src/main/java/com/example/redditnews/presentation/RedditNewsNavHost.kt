@@ -7,7 +7,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.redditnews.presentation.details.DetailsRoute
 import com.example.redditnews.presentation.home.HomeRoute
+import com.example.redditnews.presentation.home.NewsUiModel
+import com.example.redditnews.utils.CustomNavType
+import kotlin.reflect.typeOf
 
 /**
  * created by Karim Haggagi Hassan Elsayed on 5/13/25
@@ -24,8 +28,15 @@ fun RedditNewsNavHost(
     ) {
 
         composable<Screens.Home> {
-            HomeRoute()
+            HomeRoute(onItemClick = { item ->
+                navController.navigate(Screens.Details(item))
+            })
         }
 
+        composable<Screens.Details>(
+            typeMap = mapOf(typeOf<NewsUiModel>() to CustomNavType.newsModelType)
+        ) {
+            DetailsRoute(onNavigateUp = { navController.navigateUp() })
+        }
     }
 }

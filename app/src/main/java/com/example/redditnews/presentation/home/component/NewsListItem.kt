@@ -18,11 +18,11 @@ import com.example.redditnews.presentation.home.NewsUiModel
  **/
 
 @Composable
-fun NewsListItem(modifier: Modifier = Modifier,newsItem: NewsUiModel) {
+fun NewsListItem(modifier: Modifier = Modifier, newsItem: NewsUiModel, onClick: () -> Unit ={}) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp), onClick = {}) {
+            .padding(8.dp), onClick = onClick) {
         Text(
             text = newsItem.title,
             color = Color.Black,

@@ -2,6 +2,7 @@ package com.example.redditnews.presentation.home
 
 import com.example.redditnews.core.presentation.UiText
 import com.example.redditnews.domain.model.NewsDomainModel
+import kotlinx.serialization.Serializable
 
 /**
  * created by Karim Haggagi Hassan Elsayed on 5/12/25
@@ -11,7 +12,7 @@ data class HomeUiState(
     val news: List<NewsUiModel> = emptyList(),
     val error: UiText? = null
 )
-
+@Serializable
 data class NewsUiModel(
     val id: String,
     val title: String,

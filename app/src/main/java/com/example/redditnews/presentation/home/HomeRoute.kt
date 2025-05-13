@@ -21,27 +21,40 @@ import com.example.redditnews.presentation.home.component.NewsListItem
  * created by Karim Haggagi Hassan Elsayed on 5/13/25
  **/
 @Composable
-fun HomeRoute(modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeRoute(
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel(),
+    onItemClick: (NewsUiModel) -> Unit = {}
+) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     ScreenContainer(
         modifier = modifier,
         isLoading = state.isLoading,
         errorDialogText = state.error,
-        onDialogButtonClick = {},
+        onDialogButtonClick = viewModel::hideErrorDialog,
         screen = {
-            HomeScreen(state = state)
+            HomeScreen(state = state, onItemClick = onItemClick)
         }
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
+private fun HomeScreen(
+    modifier: Modifier = Modifier,
+    state: HomeUiState,
+    onItemClick: (NewsUiModel) -> Unit = {}
+) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
-            CenterAlignedTopAppBar(title = { Text(text = "Kotlin News", fontWeight = FontWeight.Bold) })
+            CenterAlignedTopAppBar(title = {
+                Text(
+                    text = "Kotlin News",
+                    fontWeight = FontWeight.Bold
+                )
+            })
         }
     ) { paddingValues ->
 
@@ -51,7 +64,7 @@ private fun HomeScreen(modifier: Modifier = Modifier, state: HomeUiState) {
                 .fillMaxSize()
         ) {
             items(state.news, key = { it.id }) {
-                NewsListItem(newsItem = it)
+                NewsListItem(newsItem = it, onClick = { onItemClick(it) })
             }
         }
     }
