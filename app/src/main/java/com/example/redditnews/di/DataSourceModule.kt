@@ -1,8 +1,10 @@
 package com.example.redditnews.di
 
 
-import com.example.redditnews.data.network.RemoteDataSource
-import com.example.redditnews.data.network.RetrofitRemoteDataSource
+import com.example.redditnews.data.local.db.LocalDataSource
+import com.example.redditnews.data.local.db.RoomLocalDataSource
+import com.example.redditnews.data.remote.network.RemoteDataSource
+import com.example.redditnews.data.remote.network.RetrofitRemoteDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,4 +19,7 @@ interface DataSourceModule {
 
     @Binds
     fun provideRemoteDataSource(dataSource: RetrofitRemoteDataSource): RemoteDataSource
+
+    @Binds
+    fun provideLocalDataSource(dataSource: RoomLocalDataSource): LocalDataSource
 }

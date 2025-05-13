@@ -1,6 +1,6 @@
-package com.example.redditnews.data
+package com.example.redditnews.data.remote.network
 
-import com.example.redditnews.data.dto.NewsDTO
+import com.example.redditnews.data.remote.dto.NewsDTO
 import retrofit2.Response
 import retrofit2.http.GET
 

@@ -1,6 +1,6 @@
 package com.example.redditnews.di
 
-import com.example.redditnews.data.ApiService
+import com.example.redditnews.data.remote.network.ApiService
 import com.example.redditnews.utils.Constants.BASE_URL
 import com.google.gson.GsonBuilder
 import dagger.Module

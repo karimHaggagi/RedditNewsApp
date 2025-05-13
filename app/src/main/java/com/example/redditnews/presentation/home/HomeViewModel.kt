@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -37,20 +38,22 @@ class HomeViewModel @Inject constructor(private val getNewsUseCase: GetNewsUseCa
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             getNewsUseCase()
-                .onSuccess { response ->
-                    _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            news = response.map { item -> item.asNewsUiModel() })
+                .collectLatest { newsResult ->
+                    newsResult.onSuccess { response ->
+                        _uiState.update {
+                            it.copy(
+                                isLoading = false,
+                                news = response.map { item -> item.asNewsUiModel() })
+                        }
                     }
-                }
-                .onError { error ->
-                    _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            error = error.toUiText()
-                        )
-                    }
+                        .onError { error ->
+                            _uiState.update {
+                                it.copy(
+                                    isLoading = false,
+                                    error = error.toUiText()
+                                )
+                            }
+                        }
                 }
         }
     }

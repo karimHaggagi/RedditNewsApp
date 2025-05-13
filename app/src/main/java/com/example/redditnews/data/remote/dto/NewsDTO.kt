@@ -1,4 +1,4 @@
-package com.example.redditnews.data.dto
+package com.example.redditnews.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 

@@ -10,5 +10,5 @@ data class NewsDomainModel(
     val body: String,
     val thumbnailUrl: String,
     val thumbnailWidth: Int,
-    val thumbnailHeight: Int,
+    val thumbnailHeight: Int
 )

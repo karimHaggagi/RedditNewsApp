@@ -1,10 +1,9 @@
-package com.example.redditnews.data.network
+package com.example.redditnews.data.remote.network
 
 import com.example.redditnews.core.data.safeCall
 import com.example.redditnews.core.domain.DataError
 import com.example.redditnews.core.domain.Result
-import com.example.redditnews.data.ApiService
-import com.example.redditnews.data.dto.NewsDTO
+import com.example.redditnews.data.remote.dto.NewsDTO
 import javax.inject.Inject
 
 /**

@@ -4,6 +4,7 @@ import com.example.redditnews.core.domain.DataError
 import com.example.redditnews.core.domain.Result
 import com.example.redditnews.domain.model.NewsDomainModel
 import com.example.redditnews.domain.repo.NewsRepo
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
@@ -11,7 +12,7 @@ import javax.inject.Inject
  **/
 class GetNewsUseCase @Inject constructor(private val newsRepo: NewsRepo) {
 
-    suspend operator fun invoke(): Result<List<NewsDomainModel>, DataError.Remote> {
+    suspend operator fun invoke(): Flow<Result<List<NewsDomainModel>, DataError>> {
         return newsRepo.getNews()
     }
 }

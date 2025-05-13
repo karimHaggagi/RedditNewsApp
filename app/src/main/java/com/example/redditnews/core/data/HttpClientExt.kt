@@ -6,7 +6,7 @@ import com.example.redditnews.core.domain.Result
 import kotlinx.coroutines.ensureActive
 import retrofit2.Response
 import java.net.SocketTimeoutException
-import java.nio.channels.UnresolvedAddressException
+import java.net.UnknownHostException
 import kotlin.coroutines.coroutineContext
 
 suspend inline fun <reified T> safeCall(execute: () -> Response<T>): Result<T, DataError.Remote> {
@@ -14,7 +14,7 @@ suspend inline fun <reified T> safeCall(execute: () -> Response<T>): Result<T, D
         execute()
     } catch (e: SocketTimeoutException) {
         return Result.Error(DataError.Remote.REQUEST_TIMEOUT)
-    } catch (e: UnresolvedAddressException) {
+    } catch (e: UnknownHostException) {
         return Result.Error(DataError.Remote.NO_INTERNET)
     } catch (e: Exception) {
         coroutineContext.ensureActive()
