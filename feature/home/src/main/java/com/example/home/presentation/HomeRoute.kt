@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -64,8 +66,10 @@ private fun HomeScreen(
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            items(state.news, key = { it.id }) {
-                NewsListItem(newsItem = it, onClick = { onItemClick(it) })
+            itemsIndexed(state.news, key = {position,item -> item.id }) {position,item ->
+                NewsListItem(
+                    modifier = Modifier.testTag("news_item_${position}") // for testing
+                    , newsItem = item, onClick = { onItemClick(item) })
             }
         }
     }

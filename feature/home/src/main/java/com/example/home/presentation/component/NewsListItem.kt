@@ -21,7 +21,9 @@ fun NewsListItem(modifier: Modifier = Modifier, newsItem: NewsUiModel, onClick: 
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp), onClick = onClick) {
+            .padding(8.dp)
+        ,
+        onClick = onClick) {
         Text(
             text = newsItem.title,
             color = Color.Black,
