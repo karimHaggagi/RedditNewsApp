@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Reddit News"
 include(":app")
- 
+include(":core")
+include(":feature:home")
+include(":feature:details")

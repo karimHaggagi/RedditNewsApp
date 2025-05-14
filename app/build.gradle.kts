@@ -2,21 +2,21 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt.android)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "com.example.redditnews"
-    compileSdk = 35
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
         applicationId = "com.example.redditnews"
-        minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = ProjectConfig.minSdk
+        targetSdk = ProjectConfig.targetSdk
+        versionCode = ProjectConfig.versionCode
+        versionName = ProjectConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -61,44 +61,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
-    implementation(libs.androidx.datastore.preferences)
-
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4") // Only available on Android/JVM.
-    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
-
     // JSON serialization library, works with the Kotlin serialization plugin.
     implementation(libs.kotlinx.serialization.json)
 
     // Compose Navigation
     api(libs.androidx.navigation.compose)
-    // retrofit
-    api(libs.retrofit)
-    implementation(libs.converter.gson)
-
-    // okhttp3
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-
-    //hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
-    api(libs.androidx.hilt.navigation.compose)
-
-    //room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-
-    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
-    // See Add the KSP plugin to your project
-    ksp(libs.androidx.room.compiler)
-
-    //room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-
-    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
-    // See Add the KSP plugin to your project
-    ksp(libs.androidx.room.compiler)
 
 
     // testing
@@ -115,6 +82,9 @@ dependencies {
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)
 
+//hilt
+    implementation (libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     // AndroidX Test - Instrumented testing
     androidTestImplementation(libs.androidx.junit.ktx)
@@ -124,4 +94,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.intents)
     androidTestImplementation(libs.androidx.idling.concurrent)
     androidTestImplementation(libs.androidx.junit)
+
+    implementation(project(":core"))
+    implementation(project(":feature:details"))
+    implementation(project(":feature:home"))
+
 }

@@ -7,10 +7,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.redditnews.presentation.details.DetailsRoute
-import com.example.redditnews.presentation.home.HomeRoute
-import com.example.redditnews.presentation.home.NewsUiModel
-import com.example.redditnews.utils.CustomNavType
+import com.example.core.presentation.model.NewsUiModel
+import com.example.core.presentation.utils.CustomNavType
+import com.example.core.presentation.Screens
+import com.example.details.DetailsRoute
+import com.example.home.presentation.HomeRoute
 import kotlin.reflect.typeOf
 
 /**
